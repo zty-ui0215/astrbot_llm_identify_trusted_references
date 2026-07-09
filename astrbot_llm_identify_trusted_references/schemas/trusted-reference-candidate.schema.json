@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/zty-ui0215/llm-identify-trusted-references/schemas/trusted-reference-candidate.schema.json",
+  "title": "LLM Identify Trusted Reference Candidate",
+  "type": "object",
+  "required": ["schema_version", "sample_type", "verification_status", "privacy_notice", "task_ref", "endpoint", "model", "versions", "time", "scores", "probe_ids", "capability_scores", "fingerprint_vector"],
+  "properties": {
+    "schema_version": {"const": "trusted-reference-candidate/v1"},
+    "sample_type": {"const": "trusted_reference_candidate"},
+    "verification_status": {"const": "maintainer_review_required"},
+    "privacy_notice": {"type": "string", "minLength": 20},
+    "task_ref": {"type": "string", "minLength": 8},
+    "endpoint": {
+      "type": "object",
+      "required": ["provider", "official_host", "matched_path"],
+      "properties": {
+        "provider": {"type": "string", "minLength": 1},
+        "official_host": {"type": "string", "minLength": 3},
+        "matched_path": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "model": {
+      "type": "object",
+      "required": ["claimed_by_official_endpoint"],
+      "properties": {"claimed_by_official_endpoint": {"type": "string"}},
+      "additionalProperties": false
+    },
+    "versions": {"type": "object"},
+    "time": {"type": "object"},
+    "scores": {"type": "object"},
+    "protocol_features": {"type": "object"},
+    "timing_statistics": {"type": "object"},
+    "token_cadence_statistics": {"type": "object"},
+    "probe_ids": {"type": "array", "items": {"type": "string"}},
+    "capability_scores": {"type": "object"},
+    "fingerprint_vector": {"type": "object"},
+    "maintainer_notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}
